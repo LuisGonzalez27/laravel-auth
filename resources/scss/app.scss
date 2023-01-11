@@ -5,3 +5,16 @@ $fa-font-path: "../fonts/font-awesome" !default;
 @import "~@fortawesome/fontawesome-free/scss/solid";
 @import "~@fortawesome/fontawesome-free/scss/brands";
 @import '~bootstrap/scss/bootstrap';
+
+#admin{
+    height: 100vh;
+    display:flex;
+  
+    #wrapper{
+      flex-grow: 1;
+    }
+    #sidebarMenu {
+      background-color: black;
+      color: white;
+    }
+}

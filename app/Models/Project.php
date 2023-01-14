@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 class Project extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'slug', 'description', 'image', 'link'];
+    protected $fillable = ['name', 'slug', 'content', 'image', 'link'];
     public static function generateSlug($name)
     {
         return Str::slug($name, '-');

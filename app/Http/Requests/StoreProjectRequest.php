@@ -25,7 +25,8 @@ class StoreProjectRequest extends FormRequest
     {
         return [
             'name' => 'required|unique:projects|max:250|min:3',
-            'content' => 'nullable'
+            'content' => 'nullable',
+            'cover_image' => 'nullable|image|max: 250',
         ];
     }
     public function messages(){

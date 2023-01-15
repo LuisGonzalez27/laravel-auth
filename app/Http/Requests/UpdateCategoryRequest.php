@@ -13,7 +13,7 @@ class UpdateCategoryRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,16 @@ class UpdateCategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required|unique:categories|max:70',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'Please add a name',
+            'name.unique:categories' => 'Project name already in use',
+            'name.max' => 'Project name cannot exceed 70 characters',
         ];
     }
 }

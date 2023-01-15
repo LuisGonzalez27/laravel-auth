@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Project extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'slug', 'content', 'cover_image', 'link'];
+    protected $fillable = ['name', 'slug', 'content', 'cover_image', 'link','category_id'];
     public static function generateSlug($name)
     {
         return Str::slug($name, '-');
@@ -18,6 +18,6 @@ class Project extends Model
 
     public function category(): BelongsTo
     {
-        return $this->belongsTo(ProjectType::class);
+        return $this->belongsTo(Category::class);
     }
 }

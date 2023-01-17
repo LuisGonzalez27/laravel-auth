@@ -14,7 +14,7 @@ class ProjectController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * 
      */
     public function index()
     {
@@ -46,7 +46,7 @@ class ProjectController extends Controller
         $data['slug'] = $slug;
 
         if ($request->hasFile('image_1')) {
-            $img_path = Storage::disk('public')->put('project_image', $request->image_1);
+            $img_path = Storage::put('project_image', $request->image_1);
             $data['image_1'] = $img_path;
         }
         
@@ -81,7 +81,7 @@ class ProjectController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * 
      */
     public function update(UpdateProjectRequest $request, Project $project)
     {
@@ -94,7 +94,7 @@ class ProjectController extends Controller
                 Storage::delete($project->cover_image);
             }
 
-            $path = Storage::disk('public')->put('project_images', $request->cover_image);
+            $path = Storage::put('project_images', $request->cover_image);
             $data['cover_image'] = $path;
         }
 
@@ -106,10 +106,15 @@ class ProjectController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Project  $project
-     * @return \Illuminate\Http\Response
+     * 
      */
     public function destroy(Project $project)
     {
+
+        if($project->cover_image){
+            Storage::delete($project->cover_image);
+        }
+
         $project->delete();
         return redirect()->route('admin.projects.index')->with('message', "$project->name deleted successfully");
     }

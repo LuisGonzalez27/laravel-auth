@@ -19,7 +19,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::all();
+        $projects = Project::get()->toQuery()->paginate(4);
         return view('admin.projects.index', compact('projects'));
     }
 
@@ -111,7 +111,7 @@ class ProjectController extends Controller
             $project->tecnologies()->sync($request->technologies);
         }
         else {
-        $project->technologies()->sync([]);
+            $project->technologies()->sync([]);
         }
         return redirect()->route('admin.projects.index')->with('message', "$project->name updated successfully");
     }

@@ -46,7 +46,7 @@
                   @enderror
                 </div>
 
-                <div class="mb-3">
+                {{-- <div class="mb-3">
                   <label for="technologies" class="form-label">Seleziona </label>
                   <select name="technologies" id="technologies" class="form-control @error('technologies') is-invalid @enderror">
                     <option value="">Select</option>
@@ -57,6 +57,25 @@
                   @error('technologies')
                   <div class="invalid-feedback">{{ $message }}</div>
                   @enderror
+                </div> --}}
+
+                <div class="mb-3">
+                  <h5>Select</h5>
+                  @foreach ($technologies as $technology)
+                    <div class="form-check form-check-inline">
+
+                        @if (old("technologies"))
+                            <input type="checkbox" class="form-check-input" id="{{$technology->slug}}" name="technologies[]" value="{{$technology->id}}" {{in_array( $technology->id, old("technologies", []) ) ? 'checked' : ''}}>
+                        @else
+                            {{-- <input type="checkbox" class="form-check-input" id="{{$technology->slug}}" name="technologies[]" value="{{$technology->id}}" {{$project->technologies->contains($technology) ? 'checked' : ''}}> --}}
+                        @endif
+                        <label class="form-check-label" for="{{$technology->slug}}">{{$technology->name}}</label>
+
+                    </div>
+                  @endforeach
+                  @error('technologies')
+                  <div class="alert alert-danger">{{ $message }}</div>
+                   @enderror
                 </div>
 
               <button type="submit" class="btn btn-success">Submit</button>

@@ -9,10 +9,12 @@
                     @csrf
                       <div class="mb-3">
                         <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name">
+                        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name"
+                        required maxlength="150" minlength="3">
                         @error('name')
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
+                        <div class="form-text">*Minimo tre caratteri e massimo 150 caratteri</div>
                       </div>
                       <div class="mb-3">
                         <label for="content" class="form-label">Content</label>
@@ -20,11 +22,13 @@
                       </div>
 
                       <div class="mb-3">
-                        <label for="cover_image" class="form-label">Immagine</label>
-                        <input type="file" name="cover_image" id="cover_image" class="form-control  @error('cover_image') is-invalid @enderror" >
+                        <img id="uploadPreview" width="200" src="https://via.placeholder.com/300x200">
+                        <label for="create_cover_image" class="form-label">Immagine</label>
+                        <input type="file" name="cover_image" id="create_cover_image" class="form-control  @error('cover_image') is-invalid @enderror">
                         @error('cover_image')
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
+                        <div class="form-text">*Massimo 5Mb per immagine</div>
                       </div>
 
                       <div class="mb-3">

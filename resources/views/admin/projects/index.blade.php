@@ -17,6 +17,7 @@
                 <th scope="col">Name</th>
                 <th scope="col">Content</th>
                 <th scope="col">Category</th>
+                <th scope="col">Technologies</th>
                 <th scope="col">Edit</th>
                 <th scope="col">Delete</th>
             </tr>
@@ -28,6 +29,7 @@
                         <td><a href="{{route('admin.projects.show', $project->slug)}}" title="View Post">{{$project->name}}</a></td>
                         <td>{{Str::limit($project->content,100)}}</td>
                         <td>{{$project->category ? $project->category->name : "to be set"}}</td>
+                        <td>{{$project->technologies && count($techologies->technology) > 0 ? count($techology->technologies) : 0}}</td>
                         <td><a class="link-secondary" href="{{route('admin.projects.edit', $project->slug)}}" title="Edit Post"><i class="fa-solid fa-pen"></i></a></td>
                         <td> 
                             <form action="{{route('admin.projects.destroy', $project->slug)}}" method="POST">

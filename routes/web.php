@@ -37,7 +37,7 @@ Route::middleware(['auth', 'verified'])
         Route::resource('projects', ProjectController::class)->parameters(['projects' => 'project:slug']);
         Route::resource('categories', CategoryController::class)->parameters(['categories' => 'category:slug']);
         Route::resource('technologies', TechnologyController::class)->parameters(['technologies' => 'technologies:slug'])
-            ->except('show', 'create', 'edit');
+            ->except('show','edit');
     });
     
 // commentare per il momento

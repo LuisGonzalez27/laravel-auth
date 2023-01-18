@@ -7,6 +7,7 @@ use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Project;
 use App\Models\Category;
+use App\Models\Technology;
 use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
@@ -19,7 +20,6 @@ class ProjectController extends Controller
     public function index()
     {
         $projects = Project::all();
-
         return view('admin.projects.index', compact('projects'));
     }
 
@@ -30,7 +30,8 @@ class ProjectController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('admin.projects.create', compact('categories'));
+        $technologies = Technology::all();
+        return view('admin.projects.create', compact('categories','technologies'));
     }
 
     /**
@@ -49,8 +50,13 @@ class ProjectController extends Controller
             $img_path = Storage::put('project_image', $request->image_1);
             $data['image_1'] = $img_path;
         }
-        
+
         $new_project = Project::create($data);
+
+        if ($request->has('technologies')) {
+            $new_project->technologies()->attach($request->technologies);
+        }
+        
         return redirect()->route('admin.projects.show', $new_project->slug);
     }
 
@@ -73,7 +79,9 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $categories = Category::all();
-        return view('admin.projects.edit', compact('project','categories'));
+        $technologies = Technology::all();
+        
+        return view('admin.projects.edit', compact('project','categories','technologies'));
     }
 
     /**
@@ -99,6 +107,12 @@ class ProjectController extends Controller
         }
 
         $project->update($data);
+        if($request->has('technologies')){
+            $project->tecnologies()->sync($request->technologies);
+        }
+        else {
+        $project->technologies()->sync([]);
+        }
         return redirect()->route('admin.projects.index')->with('message', "$project->name updated successfully");
     }
 

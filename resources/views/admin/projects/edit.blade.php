@@ -46,6 +46,19 @@
                   @enderror
                 </div>
 
+                <div class="mb-3">
+                  <label for="technologies" class="form-label">Seleziona </label>
+                  <select name="technologies" id="technologies" class="form-control @error('technologies') is-invalid @enderror">
+                    <option value="">Select</option>
+                    @foreach ($technologies as $technology)
+                        <option value="{{$technology->id}}" {{ $technology->id == old('technologies[]') ? 'selected' : '' }}>{{$technology->name}}</option>
+                    @endforeach
+                  </select>
+                  @error('technologies')
+                  <div class="invalid-feedback">{{ $message }}</div>
+                  @enderror
+                </div>
+
               <button type="submit" class="btn btn-success">Submit</button>
               <button type="reset" class="btn btn-primary">Reset</button>
         </form>

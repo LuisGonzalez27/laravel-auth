@@ -39,6 +39,18 @@
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                       </div>
+
+                      <div class="mb-3">
+                        <label for="technologies" class="form-label">Technologies</label>
+                        <select multiple class="form-select" name="technologies[]" id="technologies">
+                            @forelse ($technologies as $technology)
+                            <option value="{{$technology->id}}">{{$technology->name}}</option>
+                            @empty
+                                <option value="">No technology</option>
+                            @endforelse
+                        </select>
+
+                      </div>
                       
                       <button type="submit" class="btn btn-success">Submit</button>
                       <button type="reset" class="btn btn-primary">Reset</button>

@@ -8,5 +8,10 @@
     @endif
     <p>{{$project->content}}</p>
     <img width="400" src="{{ asset('storage/' . $project->cover_image) }}">
+    @if($project->technologies && count($project->technologies ) > 0 )
+        @foreach ($project->technologies as $technology)
+            <span>{{$technology->name}}</span>
+        @endforeach
+    @endif
 
 @endsection
